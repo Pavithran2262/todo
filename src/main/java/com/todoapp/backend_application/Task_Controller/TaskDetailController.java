@@ -1,13 +1,13 @@
 package com.todoapp.backend_application.Task_Controller;
 
 
+import com.todoapp.backend_application.API_Response.APIResponse;
+import com.todoapp.backend_application.DTO.TaskDto;
 import com.todoapp.backend_application.Task_Entity.TaskTable;
 import com.todoapp.backend_application.Task_Service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 @RestController
 @RequestMapping("/todo/task")
@@ -15,18 +15,30 @@ public class TaskDetailController {
 
     @Autowired
     TaskService taskService;
-    @GetMapping(value = "/getall")
-    public List<TaskTable> getAllTask(){
-        return taskService.getAll();
+    @GetMapping(value = "/getall/{user_id}")
+    public APIResponse getAllTask(@PathVariable("user_id") long userId){
+        return taskService.getAll(userId);
     }
     @GetMapping(value = "/get/{id}")
-    public TaskTable getTasKById(@PathVariable("id") long id){
+    public APIResponse getTasKById(@PathVariable("id") long id){
         return taskService.getById(id);
     }
+
     @PostMapping(value = "/create")
-    public TaskTable createTask(@RequestBody TaskTable taskTable){
+    public APIResponse createTask(@RequestBody TaskTable taskTable){
         return taskService.addTask(taskTable);
     }
-    @DeleteMapping
+    @DeleteMapping(value = "/delete/{id}")
+    public APIResponse deleteTaskById(@PathVariable("id")long id){
+        return taskService.deleteTaskById(id);
+    }
+    @PutMapping(value = "/update")
+    public APIResponse updateTaskById(@RequestBody TaskDto taskDto){
+        return taskService.updateTaskById(taskDto);
+    }
+    @GetMapping(value = "/sortedtask/{user_id}")
+    public APIResponse sortByDate(@PathVariable("user_id") long userId) {
+        return taskService.sortBydate(userId);
+    }
 
 }

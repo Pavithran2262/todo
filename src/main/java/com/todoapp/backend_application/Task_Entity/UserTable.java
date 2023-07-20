@@ -13,11 +13,12 @@ public class UserTable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @OneToMany
     private long userId;
     @NonNull
+    @Column(name="username")
     private String userName;
 
     @NonNull
+    @Column(name="password")
     private String password;
 }
