@@ -2,13 +2,17 @@ package com.todoapp.backend_application.Filter;
 
 
 import com.todoapp.backend_application.Configuration.UserInfoUserDetailsService;
-import com.todoapp.backend_application.Task_Service.JwtService;
+import com.todoapp.backend_application.ExceptionHandling.GlobalException;
+import com.todoapp.backend_application.Service.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.aspectj.weaver.patterns.IToken;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -25,10 +29,25 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     private JwtService jwtService;
 
     @Autowired
+    @Lazy
+    private AuthenticationManager authenticationManager;
+    @Autowired
     private UserInfoUserDetailsService userDetailsService;
+    Logger log = LoggerFactory.getLogger(GlobalException.class);
 
+    //    private final JwtService jwtService;
+//    private final AuthenticationManager authenticationManager;
+//    private final UserInfoUserDetailsService userDetailsService;
+//
+//    @Autowired
+//    public JwtAuthFilter(JwtService jwtService, AuthenticationManager authenticationManager, UserInfoUserDetailsService userDetailsService) {
+//        this.jwtService = jwtService;
+//        this.authenticationManager = authenticationManager;
+//        this.userDetailsService = userDetailsService;
+//    }
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+        log.debug("..........from filter ...........................");
         String authHeader = request.getHeader("Authorization");
         String token = null;
         String username = null;

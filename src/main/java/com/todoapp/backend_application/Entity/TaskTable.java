@@ -1,11 +1,10 @@
-package com.todoapp.backend_application.Task_Entity;
+package com.todoapp.backend_application.Entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Entity
 @Getter
@@ -16,7 +15,7 @@ import java.util.Date;
 public class TaskTable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long taskId;
 
     @Column(name = "taskname")
@@ -37,7 +36,7 @@ public class TaskTable {
     private LocalDateTime dueDate;
 
     @ManyToOne
-    @JoinColumn(name = "userid")
+    @JoinColumn(name = "userId")
     private UserTable userTable;
 
 

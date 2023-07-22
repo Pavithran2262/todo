@@ -1,19 +1,17 @@
-package com.todoapp.backend_application.Task_Service;
+package com.todoapp.backend_application.Service;
 
 import com.todoapp.backend_application.API_Response.APIResponse;
 import com.todoapp.backend_application.DTO.TaskDto;
 import com.todoapp.backend_application.ExceptionHandling.TaskNotFoundException;
 import com.todoapp.backend_application.ExceptionHandling.UserNotFoundException;
-import com.todoapp.backend_application.Task_Entity.TaskTable;
-import com.todoapp.backend_application.Task_Repository.TaskRepository;
-import com.todoapp.backend_application.Task_Repository.UserRepository;
+import com.todoapp.backend_application.Entity.TaskTable;
+import com.todoapp.backend_application.Repository.TaskRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 

@@ -1,6 +1,6 @@
-package com.todoapp.backend_application.Task_Repository;
+package com.todoapp.backend_application.Repository;
 
-import com.todoapp.backend_application.Task_Entity.TaskTable;
+import com.todoapp.backend_application.Entity.TaskTable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 

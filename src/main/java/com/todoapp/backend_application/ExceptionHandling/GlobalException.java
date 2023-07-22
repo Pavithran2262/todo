@@ -14,7 +14,7 @@ public class GlobalException extends ResponseEntityExceptionHandler {
     @Autowired
     APIResponse apiResponse;
 
-     Logger log = LoggerFactory.getLogger(GlobalException.class);
+    Logger log = LoggerFactory.getLogger(GlobalException.class);
     @ExceptionHandler(TaskNotFoundException.class)
     public APIResponse handleTaskNotFoundException(TaskNotFoundException ex) {
         log.error("Task not found .........");
@@ -35,10 +35,18 @@ public class GlobalException extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(UserAlreadyExistException.class)
     public APIResponse handleUserAlreadyExistException(UserAlreadyExistException ex) {
-        log.error("Username Already Exist .....");
-        apiResponse.setMessage("Failed : Username Already Exist, Use difference username........");
+        log.error("Name Already Exist .....");
+        apiResponse.setMessage("Failed : Name Already Exist, Use difference name........");
         apiResponse.setStatus(HttpStatus.BAD_REQUEST);
         apiResponse.setData(null);
         return apiResponse;
     }
+//    @ExceptionHandler(Exception.class)
+//    public APIResponse handleException(Exception ex) {
+//        log.error("Exception Occurred : Failed to perform .....");
+//        apiResponse.setMessage("Exception Occurred : Failed to perform the operation.....");
+//        apiResponse.setStatus("Failed");
+//        apiResponse.setData(null);
+//        return apiResponse;
+//    }
 }

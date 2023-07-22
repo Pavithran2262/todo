@@ -1,10 +1,10 @@
-package com.todoapp.backend_application.Task_Controller;
+package com.todoapp.backend_application.Controller;
 
 
 import com.todoapp.backend_application.API_Response.APIResponse;
 import com.todoapp.backend_application.DTO.TaskDto;
-import com.todoapp.backend_application.Task_Entity.TaskTable;
-import com.todoapp.backend_application.Task_Service.TaskService;
+import com.todoapp.backend_application.Entity.TaskTable;
+import com.todoapp.backend_application.Service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,7 +23,6 @@ public class TaskDetailController {
     public APIResponse getTasKById(@PathVariable("id") long id){
         return taskService.getById(id);
     }
-
     @PostMapping(value = "/create")
     public APIResponse createTask(@RequestBody TaskTable taskTable){
         return taskService.addTask(taskTable);
