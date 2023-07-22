@@ -14,7 +14,9 @@ public class GlobalException extends ResponseEntityExceptionHandler {
     @Autowired
     APIResponse apiResponse;
 
+    //This method is used for generate api response for TaskNotFoundException
     Logger log = LoggerFactory.getLogger(GlobalException.class);
+
     @ExceptionHandler(TaskNotFoundException.class)
     public APIResponse handleTaskNotFoundException(TaskNotFoundException ex) {
         log.error("Task not found .........");
@@ -24,6 +26,7 @@ public class GlobalException extends ResponseEntityExceptionHandler {
         return apiResponse;
     }
 
+    //This method is used for generate api response for usernot foundexception
     @ExceptionHandler(UserNotFoundException.class)
     public APIResponse handleUserNotFoundException(UserNotFoundException ex) {
         log.error("User not found .....");
@@ -33,6 +36,7 @@ public class GlobalException extends ResponseEntityExceptionHandler {
         return apiResponse;
     }
 
+    //This method is used for generate api response for UserAlreadyExistException
     @ExceptionHandler(UserAlreadyExistException.class)
     public APIResponse handleUserAlreadyExistException(UserAlreadyExistException ex) {
         log.error("Name Already Exist .....");
@@ -41,12 +45,4 @@ public class GlobalException extends ResponseEntityExceptionHandler {
         apiResponse.setData(null);
         return apiResponse;
     }
-//    @ExceptionHandler(Exception.class)
-//    public APIResponse handleException(Exception ex) {
-//        log.error("Exception Occurred : Failed to perform .....");
-//        apiResponse.setMessage("Exception Occurred : Failed to perform the operation.....");
-//        apiResponse.setStatus("Failed");
-//        apiResponse.setData(null);
-//        return apiResponse;
-//    }
 }

@@ -24,6 +24,7 @@ public class TaskService {
     APIResponse apiResponse;
 
     Logger log = LoggerFactory.getLogger(TaskService.class);
+    //This method is used for add the task to the task repository
     public APIResponse addTask(TaskTable taskTable) {
         try {
             taskRepository.save(taskTable);
@@ -37,7 +38,7 @@ public class TaskService {
         }
     }
 
-
+    //This method is used for get all the task for particular user by user id
     public APIResponse getAll(long userId) {
         try {
             List<TaskTable> AllTask = taskRepository.findByUserTableUserId(userId);
@@ -50,7 +51,7 @@ public class TaskService {
             throw new TaskNotFoundException("Tasks with User ID " + userId + " not found , Failed to get all task :(");
         }
     }
-
+    //This method is used for get a particular task for particular user
     public APIResponse getById(long id) {
         try {
             Optional<TaskTable> optionalTaskTable = taskRepository.findById(id);
@@ -67,7 +68,7 @@ public class TaskService {
             throw new TaskNotFoundException("Task with ID " + id + " not found");
         }
     }
-
+    //This method is used for delete the task by task id
     public APIResponse deleteTaskById(long id) {
         try {
             taskRepository.deleteById(id);
@@ -80,7 +81,7 @@ public class TaskService {
             throw new TaskNotFoundException("Task with ID : " + id+ " not found");
         }
     }
-
+    //This method is used for update existing task by task id from task dto
     public APIResponse updateTaskById(TaskDto taskDto) {
         try {
             Optional<TaskTable> OptionaltaskTable = taskRepository.findById(taskDto.getTaskId());
@@ -104,6 +105,7 @@ public class TaskService {
             throw new TaskNotFoundException("Error occurd while fetching Task detail");
         }
     }
+    // this method used for sort the tasks of the user by the date
     public APIResponse sortBydate(long userId) {
         try {
             Sort sort = Sort.by(Sort.Direction.DESC, "createdDate"); // Sort by date in descending order

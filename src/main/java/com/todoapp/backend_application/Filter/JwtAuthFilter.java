@@ -34,17 +34,8 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     @Autowired
     private UserInfoUserDetailsService userDetailsService;
     Logger log = LoggerFactory.getLogger(GlobalException.class);
-
-    //    private final JwtService jwtService;
-//    private final AuthenticationManager authenticationManager;
-//    private final UserInfoUserDetailsService userDetailsService;
-//
-//    @Autowired
-//    public JwtAuthFilter(JwtService jwtService, AuthenticationManager authenticationManager, UserInfoUserDetailsService userDetailsService) {
-//        this.jwtService = jwtService;
-//        this.authenticationManager = authenticationManager;
-//        this.userDetailsService = userDetailsService;
-//    }
+    //  This dofilter method is used for intercept the endpoint and extract the token and compare the identity
+    //with userDetailsService.loadUserByUsername(username) provided identity
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         log.debug("..........from filter ...........................");

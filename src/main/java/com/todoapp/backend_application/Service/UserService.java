@@ -29,7 +29,7 @@ public class UserService {
     Logger log = LoggerFactory.getLogger(TaskService.class);
 
     private static final String user_role = "USER";
-
+// //This method is used for change the password of the user by invoking user repository
     public APIResponse changeUserPassword(AuthRequest authRequest) {
         Optional<UserTable> OptionalUserTable;
         try {
@@ -52,7 +52,7 @@ public class UserService {
         }
 
     }
-
+//  //This method is used for the add the new user to the user table
     public APIResponse addUser(AuthRequest authRequest) throws Exception {
         Optional<UserTable> optionalUserTable;
         try {

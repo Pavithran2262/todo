@@ -22,6 +22,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import java.util.Collections;
 
+//This SecurityConfiguration class is used for the configure the authentication manager , authentication provider ,
+// password encoder and permitable endpoint
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {

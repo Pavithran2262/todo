@@ -13,6 +13,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
+// This class is used for initiate and construct the UserInfoUserDetails and retrive data from user table for verification
 public class UserInfoUserDetails implements UserDetails {
     private String name;
     private String password;

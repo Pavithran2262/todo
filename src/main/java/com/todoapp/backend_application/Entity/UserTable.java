@@ -3,8 +3,7 @@ package com.todoapp.backend_application.Entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.security.core.userdetails.UserDetails;
-
+//
 @Entity
 @Data
 @AllArgsConstructor

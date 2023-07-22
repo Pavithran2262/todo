@@ -24,6 +24,7 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+//This JWT service class is mannage the token generation and validation
 @Component
 public class JwtService {
 
@@ -31,11 +32,13 @@ public class JwtService {
 
     Logger log = LoggerFactory.getLogger(GlobalException.class);
 
+    //This method is used to extract the username from the extract claim methiod by passing token
     public String extractUsername(String token) {
         log.debug("from extract username...................");
         return extractClaim(token, Claims::getSubject);
     }
 
+    //This method is used to extract the expiration from the extract claim methiod by passing token
     public Date extractExpiration(String token) {
         log.debug("from extract expiration...................");
         return extractClaim(token, Claims::getExpiration);
@@ -47,6 +50,7 @@ public class JwtService {
         return claimsResolver.apply(claims);
     }
 
+    //This method is used for extract the claims from the token
     private Claims extractAllClaims(String token) {//call from this class
         log.debug("from ..extractAllClaims.................");
         return Jwts.parserBuilder()
@@ -56,17 +60,20 @@ public class JwtService {
                 .getBody();
     }
 
+    //This method is used for got token expiration
     private Boolean isTokenExpired(String token) {
         log.debug("from is token expired...................");
         return extractExpiration(token).before(new Date());
     }
 
+    //This method is used for validate the user name and expiration
     public Boolean validateToken(String token, UserDetails userDetails) {
         log.debug("from validate token...................");
         final String username = extractUsername(token);
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
 ////////////////////////////////////////////////////////////////////////////////////////////
+//This method is used for generate the token
     public String generateToken(String userName, Authentication auth) throws Exception {
         log.debug("from generate token...................");
         Map<String,Object> claims=new HashMap<>();
@@ -77,7 +84,7 @@ public class JwtService {
         log.debug("from generate token end........"+userName+"......"+claims+".....");
         return createToken(claims,userName);
     }
-
+    //This method is used for cretae the token with the help of all other method
     private String createToken(Map<String, Object> claims, String userName) throws Exception {
 
         String token;
@@ -95,7 +102,7 @@ public class JwtService {
         }
         return token;
     }
-
+    //This method is used for get the sign key from secret word with Algorithm.HS256
     private Key getSignKey() {
         log.debug("from get sign key...................");
         byte[] keyBytes= Decoders.BASE64.decode(SECRET);

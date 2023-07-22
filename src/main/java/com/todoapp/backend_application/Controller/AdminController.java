@@ -24,22 +24,24 @@ public class AdminController {
     private AuthenticationManager authenticationManager;
     @Autowired
     AdminService adminService;
+    @Autowired
+    APIResponse apiResponse;
 
     Logger log = LoggerFactory.getLogger(GlobalException.class);
 
+    //This registerAdmin() is used to register the admin into database via service class
     @PostMapping("/register")
     public APIResponse register(@RequestBody AuthRequest authRequest) throws Exception {
         return adminService.registerAdmin(authRequest);
     }
 
+    //This method used to change the password of the admin by accessing repository via adminservice class
     @PutMapping("/update")
     public APIResponse changeAdminPassword(@RequestBody AuthRequest authRequest){
         return adminService.changeAdminPassword(authRequest);
     }
-    @Autowired
-    APIResponse apiResponse;
-    @PostMapping("/login")
 
+    @PostMapping("/login")
     public APIResponse login(@RequestBody AuthRequest authRequest) throws Exception {
         try {
             Authentication auth = authenticationManager.authenticate(

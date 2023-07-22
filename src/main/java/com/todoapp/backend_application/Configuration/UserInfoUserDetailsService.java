@@ -21,6 +21,7 @@ public class UserInfoUserDetailsService implements UserDetailsService {
 
     Logger log = LoggerFactory.getLogger(GlobalException.class);
 
+    //This method load the user detail by the username
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<UserTable> userInfo = repository.findByUsername(username);

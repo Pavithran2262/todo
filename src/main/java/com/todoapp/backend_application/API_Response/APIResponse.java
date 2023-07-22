@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.stereotype.Component;
 
-
+// This API response class is used for generate the Uniform Api response for all response
 @Component
 @Getter
 @Setter

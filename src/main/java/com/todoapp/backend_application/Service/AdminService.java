@@ -28,12 +28,13 @@ public class AdminService {
 
     Logger log = LoggerFactory.getLogger(AdminService.class);
 
+    //This registerAdmin() is used to register the admin into database via service class
     public APIResponse registerAdmin(AuthRequest authRequest) throws Exception {
         Optional<UserTable> optionalAdminTable;
         try {
-            System.out.println("\n \n      " + authRequest.getName() + "    \n \n ");
+//            log.debug("\n \n      " + authRequest.getName() + "    \n \n ");
             optionalAdminTable = userRepository.findByUsername(authRequest.getName());
-            System.out.println("\n \n     " + optionalAdminTable + "   \n \n ");
+            log.info("\n \n     " + optionalAdminTable + "   \n \n ");
             log.debug(" optionalUserTable.isEmpty() ------------" + optionalAdminTable.isEmpty() + "    ==============");
         } catch (Exception e) {
             throw new Exception("Cannot be add the Admin with the Name " + authRequest.getName());
@@ -41,7 +42,7 @@ public class AdminService {
         if (optionalAdminTable.isEmpty()) {
             UserTable userTable = new UserTable();
             userTable.setUserName(authRequest.getName());
-            log.info("inside register admin method ..................................");
+            log.info("inside register admin method ...............");
             userTable.setPassword(passwordEncoder.encode(authRequest.getPassword()));
             userTable.setRole(admin_role);
             userRepository.save(userTable);
@@ -51,11 +52,11 @@ public class AdminService {
             log.info("Admin Added Successfully...........");
             return apiResponse;
         } else {
-            System.out.println(".........///////////.........");
-            throw new UserAlreadyExistException("Adminname" + authRequest.getName() + " Already Exist ");
+            throw new UserAlreadyExistException("Admin name" + authRequest.getName() + " Already Exist ");
         }
     }
 
+    //This method used to change the password of the admin by accessing repository
     public APIResponse changeAdminPassword(AuthRequest authRequest) {
         try {
             Optional<UserTable> OptionalAdminTable = userRepository.findByUsername(authRequest.getName());
@@ -78,9 +79,10 @@ public class AdminService {
             throw new UserNotFoundException("Error occurred while Updating Admin detail");
         }
     }
-
+//this method is used to get the all user that is only accessible to admin
     public APIResponse getAllUsers() {
         try {
+            log.debug(" from get user service .............");
             log.debug(" from get user service ........."+userRepository.findAllUsers()+"....");
             List<UserTable> userTableList = userRepository.findAllUsers();
             log.debug(" from get user service==== .............");
